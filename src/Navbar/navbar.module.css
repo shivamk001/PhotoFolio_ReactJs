@@ -1,0 +1,9 @@
+.header{
+    position: fixed;
+    top: 0%;
+    height: 10%;
+    background-color: rgb(180, 88, 88);
+    color: white;
+    width: 100%;
+    text-align: center;
+}
