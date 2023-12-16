@@ -20,9 +20,7 @@ export default function AlbumContainer(){
         onSnapshot(collection(db, 'albums'), (snapshot)=>{
             let albumList=[]
             snapshot.forEach((doc)=>{
-                albumList.push(doc.data())
-                console.log(doc);
-                
+                albumList.push({data: doc.data(), id: doc.id})
             })
             setAllAlbums(albumList)
         })
@@ -48,19 +46,20 @@ export default function AlbumContainer(){
         <div className={style.AlbumContainer}>
             <header className={style.AlbumContainerHeader}>
                 <h1>Albums</h1>
-                <Button toggleForm={toggleForm}>Create Album</Button>
+                <Button toggleForm={toggleForm} backgroundColor='white' color='#007bff' borderColor='#007bff'>Create Album</Button>
             </header>
             {
                 displayForm &&
-                <Form submitForm={submitForm}>
-                    <input type='text' placeholder='Enter Album Name' onChange={(e)=>setName(e.target.value)} value={name}/>
-                    <Button>Submit</Button>
+                <Form submitForm={submitForm} toggleForm={toggleForm}>
+                    <h3>Create Album</h3>
+                    <input type='text' placeholder='Enter Album Name' onChange={(e)=>setName(e.target.value)} value={name} required/>
+                    <Button backgroundColor='#28a745' color='white' borderColor='white'>Submit</Button>
                 </Form>
             }
 
             <div className={style.albums}>
                 {allAlbums.map((album)=>{
-                   return <AlbumCard name={album.name}/>
+                   return <AlbumCard key={album.id} album={album}/>
                 })}
                 
             </div>

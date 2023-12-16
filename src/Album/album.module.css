@@ -13,13 +13,15 @@
     
 }
 
+
 .AlbumContainerHeader{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
+    width: 80%;
 }
+
 
 .albums{
     overflow: scroll;
