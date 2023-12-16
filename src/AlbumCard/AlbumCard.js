@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function AlbumCard({album}){
     let {data: {name}, id}=album
-    console.log(album, name, id)
+    //console.log(album, name, id)
     const navigate=useNavigate()
     function handleClick(){
         navigate(`/album/${id}`)

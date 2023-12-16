@@ -6,6 +6,7 @@ import {db} from '../firebase/firebase'
 import style from './album.module.css'
 import Button from '../Button/Button';
 import Form from '../Form/Form'
+import PhotoCard from '../PhotoCard/PhotoCard';
 
 
 export default function Album(){
@@ -46,7 +47,7 @@ export default function Album(){
             //console.log('QUERYSNAPSHOT:', querySnapshot)
             let photos=[]
             querySnapshot.forEach((doc)=>{
-                photos.push(doc.data())
+                photos.push({data: doc.data(), id: doc.id})
             })
             console.log(photos)
             setAllPhotos(photos)
@@ -55,7 +56,7 @@ export default function Album(){
     },[albumId, albumName])
 
     function toggleForm(){
-        console.log(displayForm)
+        //console.log(displayForm)
         setDisplayForm(!displayForm)
     }
 
@@ -90,7 +91,9 @@ export default function Album(){
         }
 
         <div className={style.albums}>
-                
+                {allPhotos.map((photo)=>{
+                    return <PhotoCard photo={photo} key={photo.id}/>
+                })}
         </div>
     </div>
 }

@@ -16,8 +16,11 @@
     cursor: pointer;
 
     margin: 10px 0px;
+
+    box-shadow: 1px 1px 1px 2px lightgray;
 }
 
 .albumCard:hover{
     background-color: #007bff;
+    transition: 0.7s;
 }
