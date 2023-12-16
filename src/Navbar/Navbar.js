@@ -1,9 +1,14 @@
+import { Outlet } from 'react-router-dom'
 import style from './navbar.module.css'
 
 export default function Navbar(){
     return <>
+    <div className="App">
         <header className={style.header}>
-            <h3>PhotoFolio</h3>
+            <h2>PhotoFolio</h2>
         </header>
+        <Outlet/>
+    </div>
+
     </>
 }

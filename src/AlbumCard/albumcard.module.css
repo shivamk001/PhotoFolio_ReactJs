@@ -1,0 +1,23 @@
+.albumCard{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+
+    height: 200px;
+    width: 200px;
+
+    font-size: larger;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin: 10px 0px;
+}
+
+.albumCard:hover{
+    background-color: blue;
+}
