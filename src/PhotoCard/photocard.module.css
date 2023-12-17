@@ -10,7 +10,7 @@
 
     text-align: center;
 
-    margin: 10px 0px;
+    /* margin: 10px 0px; */
 
     cursor: pointer;
 }
@@ -18,4 +18,61 @@
 .photoCard:hover{
     box-shadow: 1px 1px 10px 10px lightgray;
     transition: 0.7s;
+}
+
+.utilButtons{
+    z-index: 100;
+    position: absolute;
+    top:0%;
+    left: 0%;
+
+    display: flex;
+    flex-direction: row;
+}
+
+button{
+    padding: 10px;
+    background-color: white;
+    cursor: pointer;
+    border: 2px solid;
+}
+
+button:hover{
+    background-color: black;
+    transition: 0.7s;
+}
+
+.editButton{
+    border-color:#007bff;
+}
+
+.editButton i{
+    color: #007bff;
+}
+
+.editButton:active{
+    background-color: #007bff;
+    transition: 0.7s;
+}
+
+.editButton:active i{
+    color: white;
+}
+
+
+.deleteButton{
+    border-color:#dc3545;
+}
+
+.deleteButton i{
+    color: #dc3545;
+}
+
+.deleteButton:active{
+    background-color: #dc3545;
+    transition: 0.7s;
+}
+
+.deleteButton:active i{
+    color: white;
 }

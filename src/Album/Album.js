@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { collection, doc, getDoc, addDoc, query, onSnapshot, where } from "firebase/firestore";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 import {db} from '../firebase/firebase'
 import style from './album.module.css'
@@ -22,6 +23,9 @@ export default function Album(){
 
     //to display all photos
     let [allPhotos, setAllPhotos]=useState([])
+
+
+    const navigate=useNavigate()
 
     //console.log(albumId)
 
@@ -69,14 +73,31 @@ export default function Album(){
         })
         toggleForm()
         setImageLink('')
+        toast(`${imageName} image created`)
         setImageName('')
+        
+    }
+
+    function goBack(){
+        navigate('/')
     }
 
 
     return <div className={style.AlbumContainer}>
-        
+        <button style={{
+            position: 'absolute',
+            top: '2%',
+            left: '0%',
+            border: 'none',  
+            backgroundColor: 'white', 
+            cursor: 'pointer'}} title="Go back" onClick={goBack}><i className="fa-solid fa-house fa-2xl"></i></button>
+
         <header className={style.AlbumContainerHeader}>
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
+                
                 <h1>Images in {albumName}</h1>
+            </div>
+                
                 <Button toggleForm={toggleForm} backgroundColor='white' color='#007bff' borderColor='#007bff'>Add Image</Button>
         </header>
 

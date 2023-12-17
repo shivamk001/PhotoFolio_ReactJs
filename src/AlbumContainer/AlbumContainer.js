@@ -1,6 +1,7 @@
 import {db} from '../firebase/firebase'
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, onSnapshot,  } from "firebase/firestore";
 import { useState, useEffect } from 'react'
+import { toast } from 'react-toastify';
 
 import style from './albumcontainer.module.css'
 import AlbumCard from "../AlbumCard/AlbumCard"
@@ -39,8 +40,16 @@ export default function AlbumContainer(){
             name: name
         })
         console.log("Document written with ID: ", docRef.id);
+
+        toggleForm()
+
+        toast(`${name} album created.`)
+
         setName('')
+
+        
     }
+
 
     return <>
         <div className={style.AlbumContainer}>
