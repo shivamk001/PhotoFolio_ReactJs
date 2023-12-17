@@ -52,19 +52,22 @@ export default function AlbumContainer(){
 
 
     return <>
+
         <div className={style.AlbumContainer}>
             <header className={style.AlbumContainerHeader}>
                 <h1>Albums</h1>
                 <Button toggleForm={toggleForm} backgroundColor='white' color='#007bff' borderColor='#007bff'>Create Album</Button>
             </header>
+
             {
                 displayForm &&
                 <Form submitForm={submitForm} toggleForm={toggleForm}>
                     <h3>Create Album</h3>
                     <input type='text' placeholder='Enter Album Name' onChange={(e)=>setName(e.target.value)} value={name} required/>
-                    <Button backgroundColor='#28a745' color='white' borderColor='white'>Submit</Button>
+                    <Button backgroundColor='#28a745' color='white' borderColor='white' title="Close">Submit</Button>
                 </Form>
             }
+
 
             <div className={style.albums}>
                 {allAlbums.map((album)=>{

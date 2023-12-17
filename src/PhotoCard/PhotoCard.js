@@ -8,7 +8,7 @@ import Form from '../Form/Form'
 import { toast } from 'react-toastify';
 
 
-export default function PhotoCard({photo}){
+export default function PhotoCard({photo, index, showImageInCarousel}){
     let {data: {imageLink}, data: {imageName}, id}=photo
     let [showButtons, setShowButtons]=useState(false);
 
@@ -59,11 +59,15 @@ export default function PhotoCard({photo}){
                 <input type='text' value={imageNam} onChange={(e)=>setImageName(e.target.value)}/>
                 <label>Image Link:</label>
                 <input type='text' value={imageLnk} onChange={(e)=>setImageLink(e.target.value)}/>
-                <Button backgroundColor='#28a745' color='white' borderColor='white'>Submit</Button>
+                <Button backgroundColor='#28a745' color='white' borderColor='white' title="Close">Submit</Button>
             </Form>
         }
 
-        <div style={{position:'relative', margin:'10px 0px'}} onMouseEnter={()=>setShowButtons(true)} onMouseLeave={()=>setShowButtons(false)}>       
+        <div 
+            className={style.photoCardContainer} 
+            onMouseEnter={()=>setShowButtons(true)} 
+            onMouseLeave={()=>setShowButtons(false)} 
+            onClick={()=>showImageInCarousel(index)}>       
 
             {showButtons && 
             <div className={style.utilButtons}>

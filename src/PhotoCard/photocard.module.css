@@ -1,8 +1,19 @@
+.photoCardContainer{
+    position: relative;
+    margin:10px 0px;
+    box-shadow: 1px 1px 3px 3px lightgray;
+}
+
+.photoCardContainer:hover{
+    box-shadow: 1px 1px 10px 10px lightgray;
+    transition: 0.7s;
+}
+
 .photoCard{
     height: 250px;
     width: 250px;
 
-    box-shadow: 1px 1px 3px 3px lightgray;
+    
 
     background-color: white;
 
@@ -15,10 +26,7 @@
     cursor: pointer;
 }
 
-.photoCard:hover{
-    box-shadow: 1px 1px 10px 10px lightgray;
-    transition: 0.7s;
-}
+
 
 .utilButtons{
     z-index: 100;

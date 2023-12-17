@@ -8,6 +8,7 @@ import style from './album.module.css'
 import Button from '../Button/Button';
 import Form from '../Form/Form'
 import PhotoCard from '../PhotoCard/PhotoCard';
+import ImageCarousel from '../ImageCarousel/ImageCarousel';
 
 
 export default function Album(){
@@ -24,7 +25,11 @@ export default function Album(){
     //to display all photos
     let [allPhotos, setAllPhotos]=useState([])
 
+    //to show/remove carousel
+    let [showCarousel, setShowCarousel]=useState(false)
+    let [imageIndex, setimageIndex]=useState(-1)
 
+    //to navigate
     const navigate=useNavigate()
 
     //console.log(albumId)
@@ -42,7 +47,7 @@ export default function Album(){
         getAlbumDoc()
 
         //GET ALL PHOTOS
-        
+
         //QUERY
         const q=query(collection(db, 'photos'), where('albumName', '==', albumName));
 
@@ -82,15 +87,24 @@ export default function Album(){
         navigate('/')
     }
 
+    function showImageInCarousel(i){
+        setShowCarousel(true)
+        setimageIndex(i)
+    }
+
 
     return <div className={style.AlbumContainer}>
-        <button style={{
-            position: 'absolute',
-            top: '2%',
-            left: '0%',
-            border: 'none',  
-            backgroundColor: 'white', 
-            cursor: 'pointer'}} title="Go back" onClick={goBack}><i className="fa-solid fa-house fa-2xl"></i></button>
+        <div style={{display: 'flex', justifyContent: 'flex-start', width: '100%', height: '30px'}}>
+            <button className={style.homeButton} title="Go back" onClick={goBack}><i className="fa-solid fa-house fa-xl"></i></button>
+            {/* <button style={{
+                position: 'absolute',
+                top: '2%',
+                left: '0%',
+                border: 'none',  
+                backgroundColor: 'white', 
+                cursor: 'pointer'}} title="Go back" onClick={goBack}><i className="fa-solid fa-house fa-2xl"></i></button> */}
+        </div>
+
 
         <header className={style.AlbumContainerHeader}>
             <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
@@ -111,9 +125,14 @@ export default function Album(){
             </Form>
         }
 
+        {
+            showCarousel &&
+            <ImageCarousel photos={allPhotos} currentIndex={imageIndex}/>
+        }
+
         <div className={style.albums}>
-                {allPhotos.map((photo)=>{
-                    return <PhotoCard photo={photo} key={photo.id}/>
+                {allPhotos.map((photo, index)=>{
+                    return <PhotoCard photo={photo} key={photo.id} index={index} showImageInCarousel={showImageInCarousel}/>
                 })}
         </div>
     </div>

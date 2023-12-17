@@ -102,17 +102,17 @@ export default function AlbumCard({album}){
                 <label>Album Name:</label>
                 <input type='text' value={nam} onChange={(e)=>setName(e.target.value)}/>
 
-                <Button backgroundColor='#28a745' color='white' borderColor='white'>Submit</Button>
+                <Button backgroundColor='#28a745' color='white' borderColor='white' title="Close">Submit</Button>
             </Form>
         }
 
-    <div style={{position:'relative', margin:'10px 0px'}} onMouseEnter={()=>setShowButtons(true)} onMouseLeave={()=>setShowButtons(false)}>  
+    <div className={style.albumCardContainer} onMouseEnter={()=>setShowButtons(true)} onMouseLeave={()=>setShowButtons(false)}>  
         {showButtons && 
             <div className={style.utilButtons}>
-                <button title="Edit Image" className={style.editButton} onClick={toggleEditForm}><i class="fa-solid fa-pen-to-square fa-sm"></i></button>
-                <button title="Delete Image" className={style.deleteButton} onClick={deleteAlbum}><i class="fa-solid fa-trash fa-sm"></i></button>
+                <button title="Edit Album" className={style.editButton} onClick={toggleEditForm}><i class="fa-solid fa-pen-to-square fa-sm"></i></button>
+                <button title="Delete Album" className={style.deleteButton} onClick={deleteAlbum}><i class="fa-solid fa-trash fa-sm"></i></button>
         </div>} 
-        <div className={style.albumCard} onClick={handleClick}>
+        <div className={style.albumCard} onClick={handleClick} >
             <img src={png} height='125px' width='125px' alt={png}/>
             <p>{name}</p>
         </div>

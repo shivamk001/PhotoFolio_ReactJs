@@ -1,14 +1,23 @@
 .formContainer{
     background:rgba(0,0,0,0.5);
-    position: absolute;
+
+
+    position: fixed;
     top: 0%;
+    z-index: 1000;
+
+
     height: 100%;
     width: 100%;
+
+    
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+
 .form{
     margin: 10px;
     z-index: 1000;
@@ -22,6 +31,8 @@
 
     width: 40%;
     height: auto;
+
+    padding: 5px;
 }
 
 .form .button{
