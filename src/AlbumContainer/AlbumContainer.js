@@ -2,6 +2,7 @@ import {db} from '../firebase/firebase'
 import { collection, addDoc, onSnapshot,  } from "firebase/firestore";
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify';
+import ClipLoader from "react-spinners/ClipLoader";
 
 import style from './albumcontainer.module.css'
 import AlbumCard from "../AlbumCard/AlbumCard"
@@ -16,6 +17,9 @@ export default function AlbumContainer(){
 
     let [displayForm, setDisplayForm]=useState(false);
 
+    //isLoading
+    const [isLoading, setisLoading]=useState(true)
+
     //get all albums
     useEffect(()=>{
         onSnapshot(collection(db, 'albums'), (snapshot)=>{
@@ -24,7 +28,9 @@ export default function AlbumContainer(){
                 albumList.push({data: doc.data(), id: doc.id})
             })
             setAllAlbums(albumList)
+            setisLoading(false)
         })
+        document.title='Photofolio'
     },[])
 
 
@@ -52,8 +58,7 @@ export default function AlbumContainer(){
 
 
     return <>
-
-        <div className={style.AlbumContainer}>
+            <div className={style.AlbumContainer}>
             <header className={style.AlbumContainerHeader}>
                 <h1>Albums</h1>
                 <Button toggleForm={toggleForm} backgroundColor='white' color='#007bff' borderColor='#007bff'>Create Album</Button>
@@ -68,15 +73,25 @@ export default function AlbumContainer(){
                 </Form>
             }
 
-
-            <div className={style.albums}>
-                {allAlbums.map((album)=>{
-                   return <AlbumCard key={album.id} album={album}/>
-                })}
-                
-            </div>
+            {isLoading?
+                <ClipLoader
+                        color='black'
+                        loading={isLoading}
+                        size={150}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                />
+            :
+                <div className={style.albums}>
+                    {allAlbums.map((album)=>{
+                    return <AlbumCard key={album.id} album={album}/>
+                    })}
+                    
+                </div>
+            }
         
-        </div>
+            </div>
+
     </>
 
 }

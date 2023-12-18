@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { collection, doc, getDoc, addDoc, query, onSnapshot, where } from "firebase/firestore";
 import { useParams, useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from 'react-toastify';
 
 import {db} from '../firebase/firebase'
@@ -32,6 +33,9 @@ export default function Album(){
     //to navigate
     const navigate=useNavigate()
 
+    //isLoading
+    const [isLoading, setisLoading]=useState(true)
+
     //console.log(albumId)
 
     useEffect(()=>{
@@ -43,6 +47,7 @@ export default function Album(){
             //console.log(albumDoc.data())
             let {name}=albumDoc.data()
             setAlbumName(name)
+            setisLoading(false)
         }
         getAlbumDoc()
 
@@ -61,6 +66,8 @@ export default function Album(){
             console.log(photos)
             setAllPhotos(photos)
         })
+
+        document.title=albumName
 
     },[albumId, albumName])
 
@@ -101,46 +108,51 @@ export default function Album(){
     return <div className={style.AlbumContainer}>
         <div style={{display: 'flex', justifyContent: 'flex-start', width: '100%', height: '30px'}}>
             <button className={style.homeButton} title="Go back" onClick={goBack}><i className="fa-solid fa-house fa-xl"></i></button>
-            {/* <button style={{
-                position: 'absolute',
-                top: '2%',
-                left: '0%',
-                border: 'none',  
-                backgroundColor: 'white', 
-                cursor: 'pointer'}} title="Go back" onClick={goBack}><i className="fa-solid fa-house fa-2xl"></i></button> */}
         </div>
 
+        {isLoading?
+                  <ClipLoader
+                  color='black'
+                  loading={isLoading}
+                  size={150}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+                :
+            <>
+                <header className={style.AlbumContainerHeader}>
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
+                        
+                        <h1>Images in {albumName}</h1>
+                    </div>
+                        
+                        <Button toggleForm={toggleForm} backgroundColor='white' color='#007bff' borderColor='#007bff'>Add Image</Button>
+                </header>
 
-        <header className={style.AlbumContainerHeader}>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems:'center'}}>
-                
-                <h1>Images in {albumName}</h1>
-            </div>
-                
-                <Button toggleForm={toggleForm} backgroundColor='white' color='#007bff' borderColor='#007bff'>Add Image</Button>
-        </header>
+                {
+                    displayForm &&
+                    <Form submitForm={submitForm} toggleForm={toggleForm}>
+                        <h3>Add Image</h3>
+                        <input type='text' placeholder='Enter Image Name' onChange={(e)=>setImageName(e.target.value)} value={imageName}/>
+                        <input type='text' placeholder='Enter Image Link' onChange={(e)=>setImageLink(e.target.value)} value={imageLink}/>
+                        <Button backgroundColor='#28a745' color='white' borderColor='white'>Submit</Button>
+                    </Form>
+                }
 
-        {
-            displayForm &&
-            <Form submitForm={submitForm} toggleForm={toggleForm}>
-                <h3>Add Image</h3>
-                <input type='text' placeholder='Enter Image Name' onChange={(e)=>setImageName(e.target.value)} value={imageName}/>
-                <input type='text' placeholder='Enter Image Link' onChange={(e)=>setImageLink(e.target.value)} value={imageLink}/>
-                <Button backgroundColor='#28a745' color='white' borderColor='white'>Submit</Button>
-            </Form>
+                {/* DISPLAY THE CAROUSEL */}
+                {
+                    showCarousel &&
+                    <ImageCarousel photos={allPhotos} currentIndex={imageIndex} closeCarousel={closeCarousel}/>
+                }
+
+
+
+                <div className={style.albums}>
+                        {allPhotos.map((photo, index)=>{
+                            return <PhotoCard photo={photo} key={photo.id} index={index} showImageInCarousel={showImageInCarousel}/>
+                        })}
+                </div>
+            </>
         }
-
-
-        {/* DISPLAY THE CAROUSEL */}
-        {
-            showCarousel &&
-            <ImageCarousel photos={allPhotos} currentIndex={imageIndex} closeCarousel={closeCarousel}/>
-        }
-
-        <div className={style.albums}>
-                {allPhotos.map((photo, index)=>{
-                    return <PhotoCard photo={photo} key={photo.id} index={index} showImageInCarousel={showImageInCarousel}/>
-                })}
-        </div>
     </div>
 }
