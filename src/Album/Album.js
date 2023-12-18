@@ -125,6 +125,8 @@ export default function Album(){
             </Form>
         }
 
+
+        {/* DISPLAY THE CAROUSEL */}
         {
             showCarousel &&
             <ImageCarousel photos={allPhotos} currentIndex={imageIndex}/>

@@ -52,7 +52,7 @@ export default function PhotoCard({photo, index, showImageInCarousel}){
     return <>
 
         {
-        displayForm &&
+            displayForm &&
             <Form submitForm={submitForm} toggleForm={toggleEditForm}>
                 <h3>Edit Image</h3>
                 <label>Image Name:</label>
@@ -61,13 +61,15 @@ export default function PhotoCard({photo, index, showImageInCarousel}){
                 <input type='text' value={imageLnk} onChange={(e)=>setImageLink(e.target.value)}/>
                 <Button backgroundColor='#28a745' color='white' borderColor='white' title="Close">Submit</Button>
             </Form>
-        }
+        }   
+
 
         <div 
             className={style.photoCardContainer} 
             onMouseEnter={()=>setShowButtons(true)} 
             onMouseLeave={()=>setShowButtons(false)} 
-            onClick={()=>showImageInCarousel(index)}>       
+            onClick={()=>showImageInCarousel(index)}
+            > 
 
             {showButtons && 
             <div className={style.utilButtons}>
@@ -78,8 +80,6 @@ export default function PhotoCard({photo, index, showImageInCarousel}){
                 <img src={imageLink} width='100%' height='200px'/>
                 <p>{imageName}</p>
             </div>
-
-
 
         </div>
 
