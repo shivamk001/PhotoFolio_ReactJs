@@ -78,7 +78,7 @@ export default function PhotoCard({photo, index, showImageInCarousel}){
                 <button title="Delete Image" className={style.deleteButton} onClick={deletePhoto}><i class="fa-solid fa-trash fa-sm"></i></button>
             </div>} 
             <div className={style.photoCard}  >
-                <img src={imageLink} width='100%' height='200px'/>
+                <img src={imageLink} width='100%' height='200px' alt={imageLink}/>
                 <p>{imageName}</p>
             </div>
 
