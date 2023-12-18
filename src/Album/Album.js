@@ -92,6 +92,11 @@ export default function Album(){
         setimageIndex(i)
     }
 
+    function closeCarousel(){
+        setShowCarousel(false)
+        setimageIndex(-1)
+    }
+
 
     return <div className={style.AlbumContainer}>
         <div style={{display: 'flex', justifyContent: 'flex-start', width: '100%', height: '30px'}}>
@@ -129,7 +134,7 @@ export default function Album(){
         {/* DISPLAY THE CAROUSEL */}
         {
             showCarousel &&
-            <ImageCarousel photos={allPhotos} currentIndex={imageIndex}/>
+            <ImageCarousel photos={allPhotos} currentIndex={imageIndex} closeCarousel={closeCarousel}/>
         }
 
         <div className={style.albums}>

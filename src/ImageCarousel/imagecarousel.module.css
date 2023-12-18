@@ -26,3 +26,15 @@ button:active{
 button:active i{
     color: white;
 }
+
+.closeButton{
+    background-color: #dc3545;
+}
+
+.closeButton i{
+    color: white;
+}
+
+.closeButton:active{
+    background-color: #dc3545;
+}

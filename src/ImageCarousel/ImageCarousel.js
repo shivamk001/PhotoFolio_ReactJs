@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import style from './imagecarousel.module.css'
 
-export default function ImageCarousel({photos, currentIndex}){
+export default function ImageCarousel({photos, currentIndex, closeCarousel}){
 
     let [cI, setCI]=useState(currentIndex)
     console.log(photos, currentIndex, photos[currentIndex].data.imageLink)
@@ -23,12 +23,12 @@ export default function ImageCarousel({photos, currentIndex}){
 
     return (<>
         <div className={style.carousel}>
-            <div style={{width: '100%', display: 'flex', justifyContent: 'flex-end'}}>
-                <button><i class="fa-solid fa-x"></i></button>
+            <div style={{width: '60%', display: 'flex', justifyContent: 'flex-end'}}>
+                <button className={style.closeButton} onClick={closeCarousel} title='Close'><i class="fa-solid fa-x"></i></button>
             </div>
             
             <img src={photos[cI].data.imageLink} height='60%' width='60%'/>
-            <div>
+            <div style={{width: '60%', display: 'flex', justifyContent: 'space-between'}}>
                 <button title='prev image' onClick={goLeft}><i class='fas fa-angle-left'></i></button>
                 <button title='next image' onClick={goRight}><i className='fas fa-angle-right'></i></button>
             </div>

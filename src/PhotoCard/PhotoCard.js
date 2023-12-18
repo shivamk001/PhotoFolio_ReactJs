@@ -25,8 +25,9 @@ export default function PhotoCard({photo, index, showImageInCarousel}){
 
 
     //to open the edit image info form
-    function toggleEditForm(){
+    function toggleEditForm(e){
         //console.log(displayForm)
+        e.stopPropagation()
         setDisplayForm(!displayForm)
     }
 
@@ -45,7 +46,7 @@ export default function PhotoCard({photo, index, showImageInCarousel}){
             imageName: imageNam
         })
         toast('Image detail updated')
-        toggleEditForm()
+        toggleEditForm(e)
     }
 
 
